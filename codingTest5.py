@@ -1,3 +1,8 @@
+import time
+
+# 시간 측정
+start = time.time()
+
 # 정수 N 입력
 print("N을 입력하세요 (0 <= N <= 23) : ")
 N = int(input())
@@ -11,6 +16,10 @@ for i in range(N+1):
                 count += 1
 
 print(count)
+
+# 걸린시간 출력
+print("Time : ", time.time() - start)
+
 
 # 처음에는
 # for i in range(N+1):
