@@ -1,5 +1,3 @@
-from collections import deque
-
 # N, M 주어진다. (4 <= N, M <= 200)
 print("직사각형의 크기(N * M)을 정하는 N, M 입력 (4 <= N, M <= 200)")
 N, M = map(int, input().split())
@@ -29,9 +27,6 @@ count = 1
 # (0, 0) 지점에서부터 BFS 를 수행하여 모든 노드의 값을 거리 정보로 넣는다.
 def search(x, y):
     global count
-    queue = deque()
-    # queue 에 삽입
-    queue.append((x, y))
     # 이 위치에서의 상,하,좌,우 방향에 있는 정보를 얻어야 한다.
     for i in range(4):
         a = x + dx[i]
@@ -40,10 +35,13 @@ def search(x, y):
         if a <= -1 or a >= N or b <= -1 or b >= M:
             continue
         if arr[a][b] == 1:
-            queue.append((a, b))
+            # 다시 방문하지 못하게 1 증가시켜준다.
+            arr[x][y] += 1
             count += 1
-    # 하 또는 우 방향으로 이동가능하면 둘 중 한 곳을 선택하게 한다.
-    # 만약, 아래 방향과 오른쪽 방향 모두 갈 수 있다면, 그 두가지 경우를 따로 저장시켜서 마지막에 이동한 칸의 개수를 비교해서 결정
+            search(a, b)
+        # 1로 표시된 곳은 다 찾아가서 최소 칸을 구할 수 없는 경우가 생긴다 => 이를 해결?
+        # 만약, 아래 방향이나 오른쪽 방향 이동 가능한 상태에서 위쪽이나 좌측으로 이동가능하면 아래 또는 오른쪽 방향 선택하게 한다.
 
 
 search(0, 0)
+print(count)
