@@ -1,3 +1,5 @@
+from collections import deque
+
 # N, M 주어진다. (4 <= N, M <= 200)
 print("직사각형의 크기(N * M)을 정하는 N, M 입력 (4 <= N, M <= 200)")
 N, M = map(int, input().split())
@@ -20,31 +22,33 @@ for i in range(N):
 dx = [-1, 1, 0, 0]
 dy = [0, 0, -1, 1]
 
-count = 1
-
 
 # BFS 를 이용했을 때 매우 효과적으로 해결 가능. (시작 지점에서 가까운 노드부터 차례대로 그래프의 모든 노드를 탐색하기 때문)
 # (0, 0) 지점에서부터 BFS 를 수행하여 모든 노드의 값을 거리 정보로 넣는다.
 def search(x, y):
-    global count
     # 이 위치에서의 상,하,좌,우 방향에 있는 정보를 얻어야 한다.
-    for i in range(4):
-        a = x + dx[i]
-        b = y + dy[i]
-        # 또한, 맵 밖으로 나가는 경우가 생기지 않도록 한다. (무시하기)
-        if a <= -1 or a >= N or b <= -1 or b >= M:
-            continue
-        if arr[a][b] == 1:
-            if a == N - 1 and b == M - 1:
-                count += 1
-                break
-            # 다시 방문하지 못하게 1 증가시켜준다.
-            arr[x][y] += 1
-            count += 1
-            search(a, b)
-        # 1로 표시된 곳은 다 찾아가서 최소 칸을 구할 수 없는 경우가 생긴다 => 이를 해결?
-        # 만약, 아래 방향이나 오른쪽 방향 이동 가능한 상태에서 위쪽이나 좌측으로 이동가능하면 아래 또는 오른쪽 방향 선택하게 한다.
-    return count
+    queue = deque()
+    # 현재 위치를 queue 에 삽입
+    queue.append((x, y))
+    # queue 가 빌 때까지 반복하게 한다.
+    while queue:
+        # 현재 체크할 위치를 queue 에서 빼준다.
+        x, y = queue.popleft()
+        for i in range(4):
+            a = x + dx[i]
+            b = y + dy[i]
+            # 또한, 맵 밖으로 나가는 경우가 생기지 않도록 한다. (무시하기)
+            if a <= -1 or a >= N or b <= -1 or b >= M:
+                continue
+            # 방문해야 한다면
+            if arr[a][b] == 1:
+                # 방문하는 좌표 전에 있었던 값에서 1을 더한 값으로 변경 시켜주면서 이동한 거리를 세어준다.
+                arr[a][b] = arr[x][y] + 1
+                # 현재 좌표를 queue 에 넣어주어서 현재 위치에서 상하좌우를 탐색하도록 한다.
+                queue.append((a, b))
+    # 최단거리를 출력해야 하므로, 결국은 마지막에 위치한 좌표에서의 값을 출력해주면 되는 것이다.
+    # 이동하면서 계속해서 이동 횟수를 측정해왔기 때문
+    return arr[N-1][M-1]
 
 
 print(search(0, 0))
