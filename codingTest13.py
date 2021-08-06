@@ -1,8 +1,5 @@
 import time
 
-# 시간 측정
-start = time.time()
-
 print("부품의 개수 N 입력 (1 <= N <= 1,000,000) : ")
 N = int(input())
 
@@ -16,6 +13,9 @@ print("공백을 통해서 M개의 정수를 입력")
 arr = list(map(int, input().split()))
 
 arr2 = []
+
+# 시간 측정
+start = time.time()
 
 
 def sequential_search(data, array):
