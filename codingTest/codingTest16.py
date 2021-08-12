@@ -1,9 +1,14 @@
+import time
+
 # 식량창고의 개수 N이 주어진다
 print("식량창고의 개수 N 지정 (3 <= N <= 100) :")
 N = int(input())
 
 print("공백으로 구분되어 각 식량창고에 저장된 식량의 개수 K 지정 (0 <= K <= 1,000) :")
 K = list(map(int, input().split()))
+
+# 시간 측정
+start = time.time()
 
 d = [0] * 100
 
@@ -17,3 +22,9 @@ for i in range(2, N):
 
 # 결국, 마지막 칸에 들어있는 수를 출력하면 된다.
 print(d[N - 1])
+
+# 시간 측정
+start = time.time()
+
+# 걸린시간 출력
+print("Time : ", time.time() - start)
