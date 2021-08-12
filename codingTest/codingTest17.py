@@ -18,8 +18,5 @@ for i in range(3, N + 1):
 
 print(d[N] % 796796)
 
-# 시간 측정
-start = time.time()
-
 # 걸린시간 출력
 print("Time : ", time.time() - start)

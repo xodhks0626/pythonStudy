@@ -38,8 +38,5 @@ if d[M] == 10001:
 else:
     print(d[M])
 
-# 시간 측정
-start = time.time()
-
 # 걸린시간 출력
 print("Time : ", time.time() - start)

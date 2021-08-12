@@ -36,8 +36,5 @@ for i in range(2, x + 1):
 
 print(d[x])
 
-# 시간 측정
-start = time.time()
-
 # 걸린시간 출력
 print("Time : ", time.time() - start)

@@ -23,8 +23,5 @@ for i in range(2, N):
 # 결국, 마지막 칸에 들어있는 수를 출력하면 된다.
 print(d[N - 1])
 
-# 시간 측정
-start = time.time()
-
 # 걸린시간 출력
 print("Time : ", time.time() - start)
