@@ -11,10 +11,6 @@ arr.sort()
 count = 0
 group = 0
 for i in arr:
-    if i == n:
-        group = 1
-        break
-
     count += 1
     if count < i:
         continue
