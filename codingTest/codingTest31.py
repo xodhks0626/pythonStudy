@@ -1,3 +1,6 @@
+n = input()
+
+
 def solution(s):
     length = len(s)  # 문자열 길이 변수
     answer = length
@@ -31,9 +34,8 @@ def solution(s):
             final += str(count) + first
 
         answer = min(len(final), answer)
-        print(final)
 
     return answer
 
 
-print(solution(input()))
+print(solution(n))
