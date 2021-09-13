@@ -8,6 +8,7 @@ for i in range(10):
     arr.append(list(map(int, input().split())))
 
 arr[1][1] = 9
+
 i = 1
 j = 2
 
